@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-12 px-5">
+      <div class="text-center pb-4">
+        <h1> Пользователи </h1>
+      </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th> № </th>
+                    <th> Логин </th>
+                    <th> Фамилия </th>
+                    <th> Имя </th>
+                    <th> Отчество </th>
+                    <th> Роль </th>
+                    <th>  </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for user in users%}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{user.login}}</td>
+                    <td>{{user.fio.split()[0]}}</td>
+                    <td> {{user.fio.split()[1]}} </td>
+                    <td> {{user.fio.split()[2] or ''}} </td>
+                    <td> {{user.role_name}}</td>
+                    <td> 
+                        <a class="btn btn-dark" href="{{ url_for('users.edit_users', id_user=user.id_user) }}">Редактировать</a> 
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalUser" data-user-id="{{ user.id_user }}">Удалить</button>
+                    </td> 
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+   
+      <div class="modal fade" id="deleteModalUser" tabindex="-1" aria-labelledby="deleteModalUserLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalUserLabel">Удаление учетной записи</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Вы уверены, что хотите удалить данную учетную запись?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Отменить</button>
+                <form method="post" id="deleteModalUserForm">
+                  <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>  
+    </div>
+  </div>       
+{% endblock %}

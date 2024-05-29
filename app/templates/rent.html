@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="text-center">
+            <h1>Аренда книги</h1>
+        </div>
+        <form method="post">
+            <div class="mb-3">
+                <label for="book_name" class="form-label">Название</label>
+                <input type="text" name="book_name" id="book_name" class="form-control bg" value="{{ book.book_name }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">Автор</label>
+                <input type="author" name="author" id="author" class="form-control bg" value="{{ book.author }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Категория</label>
+                <input type="text" name="category" id="category" class="form-control bg" value="{{ book.category_name }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="series" class="form-label">Серия</label>
+                <input type="text" name="series" id="series" class="form-control bg" value="{{ book.series_name }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="publishing" class="form-label">Издательство</label>
+                <input type="text" name="publishing" id="publishing" class="form-control bg" value="{{ book.name_publishing }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="rent_term" class="form-label">Срок аренды</label>
+                <select name="rent_term" id="rent_term" class="form-select bg">
+                    <option value="3_days" selected>3 дня</option>
+                    <option value="5_days">5 дней</option>
+                    <option value="week">1 неделя</option>
+                    <option value="2_week">2 недели</option>
+                    <option value="month">1 месяц</option>
+                </select>
+            </div>
+            <div class="mb-3 text-center d-grid">
+                <button type="submit" class="btn btn-dark">Арендовать</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock%}

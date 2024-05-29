@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="text-center">
+          <h1>Личный кабинет</h1>
+        </div>
+        <div>
+          <form>
+            <div class="mb-3">
+              <label for="login" class="form-label">Логин</label>
+              <input type="text" class="form-control" id="login" name="login" value="{{ user_record.login }}" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Имя</label>
+              <input type="text" class="form-control" id="name" name="name" value="{{ user_record.first_name }}" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Фамилия</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" value="{{ user_record.last_name }}" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="middleName" class="form-label">Отчество</label>
+              <input type="text" class="form-control" id="middleName" name="middleName" value="{{ user_record.middle_name }}" readonly>
+            </div>
+          </form>
+          <div class="d-grid mb-3">
+            <a class="btn btn-dark" href="{{ url_for('users.edit_users', id_user=user_record.id_user) }}">Редактировать</a>
+          </div>
+        </div>
+
+      <div class="mt-5 pt-5">
+        <div class="text-center pb-4">
+          <h1>Книги, читаемые в данный момент</h1>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Название книги</th>
+                <th>Автор</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for rented_book in rented_books %}
+                <tr>
+                  <td> {{loop.index}} </td>
+                  <td>{{ rented_book.book_name }}</td>
+                  <td>{{ rented_book.author }}</td>
+                  <td>
+                    <a class="btn btn-dark" href="{{ url_for('read_book', id_book=rented_book.id_book) }}">Открыть</a>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalRecord" data-book-id="{{rented_book.id_book}}">Удалить</button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="modal fade" id="deleteModalRecord" tabindex="-1" aria-labelledby="deleteModalRecordLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="deleteModalRecordLabel">Удаление книги</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Вы уверены, что хотите удалить данную книгу из арендованных?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Отменить</button>
+              <form method="post" id="deleteModalRecordForm">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>         
+{% endblock %}

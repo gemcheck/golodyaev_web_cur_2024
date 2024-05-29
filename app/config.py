@@ -1,0 +1,11 @@
+
+
+SECRET_KEY = b'afd41e94b269e053cc3f6d065a717cffde51ee5208928463ce897faed531006b'
+
+SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://std_2445_library:30012015@std-mysql.ist.mospolytech.ru/std_2445_library'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_ECHO = True
+
+
+ADMIN_ROLE_ID = 1
+LIBRARION_ROLE_ID = 2

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="text-center">
+      <h1>Регистрация</h1>
+    </div>
+    <form method="post">
+        <div class="mb-3">
+          <label for="login">Логин</label>
+          <input class="form-control" id="login" placeholder="Введите логин" name="login" value="{{ request.form.login }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="password">Пароль</label>
+          <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword">Подтверждение пароля</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Повторите пароль" name="confirmPassword" required>
+        </div>
+        <div class="mb-3">
+          <label for="name">Имя</label>
+          <input class="form-control" id="name" placeholder="Введите имя" name="name" value="{{ request.form.name }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="lastName">Фамилия</label>
+          <input class="form-control" id="lastName" placeholder="Введите фамилию" name="lastName" value="{{ request.form.lastName }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="middleName">Отчество</label>
+          <input class="form-control" id="middleName" placeholder="Введите отчество" name="middleName" value="{{ request.form.middleName }}">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+          <label class="form-check-label" for="remember_me">Запомнить меня</label>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-dark mt-2 mb-4">Зарегистрироваться</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock%}

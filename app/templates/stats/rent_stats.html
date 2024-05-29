@@ -1,0 +1,35 @@
+{% extends 'stats/base.html' %}
+
+{% block stats_content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 px-5">
+        <div class="text-center pb-4">
+            <h1> Статистика аренды </h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> № </th>
+                    <th> Название книги </th>
+                    <th> Автор </th>
+                    <th> Количество аренд </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rent_statistic in rent_statistics %}
+                    <tr>
+                        <td> {{loop.index}} </td>
+                        <td> {{rent_statistic.book_name}} </td>
+                        <td> {{rent_statistic.author}} </td>
+                        <td> {{rent_statistic.rent_count}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="mb-3">
+            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-dark fw-bold"
+            href="{{ url_for('stats.rent_stats_export') }}">Скачать отчёт по количеству аренд</a>
+        </div>
+    </div>
+</div>
+{% endblock%}

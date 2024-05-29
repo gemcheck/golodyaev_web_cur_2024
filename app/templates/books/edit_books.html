@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center pb-4">
+  <h1> Редактирование книги </h1>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6 px-5">
+    <div class=" book-card-edit text-center">
+      <img src="{{ url_for('static', filename='images/' ~ record_book.id_book ~ '.jpg') }}" class="img-fluid" alt="{{ record_book.book_name }}">
+      <p data-bs-toggle="modal" data-bs-target="#uploadImageModal">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#uploadImageModal"
+          class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-dark">
+          Выбрать новое изображение</a>
+      </p>
+    </div>
+  </div>
+  <div class="col-md-6 px-5">
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('books.edit_books', id_book=record_book.id_book) }}">
+        <div class="mb-3">
+          <label for="author">Автор</label>
+          <input class="form-control" id="author" name="author" value="{{record_book.author}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="nameBook">Название</label>
+          <input class="form-control" id="nameBook" name="nameBook" value="{{record_book.book_name}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="category">Категория</label>
+          <input class="form-control" id="category" name="category" value="{{record_book.category_name}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="seria">Серия</label>
+          <input class="form-control" id="seria" name="seria" value="{{record_book.name_series or ''}}">
+        </div>
+        <div class="mb-3">
+          <label for="publisher">Издатель</label>
+          <input class="form-control" id="publisher" name="publisher" value="{{record_book.name_publishing}}" required>
+        </div>
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-dark">Сохранить</button>
+        </div>
+      </form>
+  </div>
+</div>
+
+<div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="uploadImageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadImageModalLabel">Загрузить новое изображение</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('books.upload_image', id_book=record_book.id_book) }}">
+          <div class="mb-3">
+            <label for="image" class="form-label">Выберите изображение</label>
+            <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-dark">Загрузить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

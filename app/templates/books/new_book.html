@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center pb-4">
+  <h1> Добавить книгу </h1>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6 px-5">
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('books.new_book') }}">
+        <div class="mb-3">
+          <label for="author">Автор</label>
+          <input class="form-control" id="author" aria-describedby="author" placeholder="Введите автора" name="author" value="{{ request.form.author }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="nameBook">Название</label>
+          <input class="form-control" id="nameBook" placeholder="Введите название книги" name="nameBook" value="{{ request.form.nameBook }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="category">Категория</label>
+          <input class="form-control" id="category" placeholder="Введите название категории" name="category" value="{{ request.form.category }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="seria">Серия</label>
+          <input class="form-control" id="seria" placeholder="Введите название серии" name="seria" value="{{ request.form.seria }}">
+        </div>
+        <div class="mb-3">
+            <label for="publisher">Издатель</label>
+          <input class="form-control" id="publisher" placeholder="Введите издателя" name="publisher" value="{{ request.form.publisher }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="image">Изображение книги</label>
+          <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-dark">Сохранить</button>
+        </div>
+      </form>
+</div>
+{% endblock %}
